@@ -1,1 +1,1 @@
-$(".flash").delay(2000).fadeOut(500);
+$(".flash").delay(5000).fadeOut(500);

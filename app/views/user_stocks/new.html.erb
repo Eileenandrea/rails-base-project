@@ -41,7 +41,7 @@
                 <%= f.number_field :order_price, autofocus: true, class: 'form-control', id: 'order-price', :readonly => 'true', step: 0.1%>
             </div>
             <div class="form-group">
-                <%= f.label "Total Price (+brokerage fee)" %>
+                <%= f.label "Total Price (#{@type=='buy' ? '+': '-'}brokerage fee)" %>
                 <%= f.number_field :total_price, autofocus: true, class: 'form-control', id: 'total-price', :readonly => 'true', step: 0.1%>
             </div>
             <div class="form-group">         

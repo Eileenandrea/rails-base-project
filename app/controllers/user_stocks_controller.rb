@@ -124,19 +124,20 @@ class UserStocksController < ApplicationController
   def my_portfolio
     @tracked_stocks = current_user.stocks.paginate(page: params[:page], per_page: 10)
     @user_stocks = current_user.user_stocks
-    @tracked_stocks.each do |stock|
-      Stock.update_price(stock.ticker)
-    end
+   return unless current_user.buyer?
+      @tracked_stocks.each do |stock|
+        Stock.update_price(stock.ticker)
+      end
   end
 
   def transactions
     if current_user.buyer?
-      @transactions = current_user.buyer_transactionrecords
+      @transactions = current_user.buyer_transactionrecords.paginate(page: params[:page], per_page: 10).order('created_at DESC')
     elsif current_user.broker?
-      @transactions = current_user.broker_transactionrecords
+      @transactions = current_user.broker_transactionrecords.paginate(page: params[:page], per_page: 10).order('created_at DESC')
     else
       current_user.admin?
-      @transactions = Transactionrecord.all
+      @transactions = Transactionrecord.all.paginate(page: params[:page], per_page: 10).order('created_at DESC')
     end
   end
 

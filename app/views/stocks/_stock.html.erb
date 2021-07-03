@@ -1,16 +1,16 @@
 <tr>
 
     <th scope="col">
-        <%=link_to "#{stock.ticker}", stock_path(stock)%>
+        <%=link_to "#{stock.ticker}", stock_path(stock), class:'stock-link'%>
     </th>
     <th scope="col"><%=stock.name%></th>
-    <th scope="col"><%=stock.last_price%></th>
+    <th scope="col" class="text-center"><%=stock.last_price%></th>
 
     <%if current_user.buyer? && broker%>
         <th scope="col"><%=broker.email%></th>
     <%end%>
     <%if current_user.broker?%>
-        <th scope="col">
+        <th scope="col" class="text-center">
             <%if current_user.stock_already_tracked?(stock.ticker)%>
                 <%=link_to user_stock_path(stock.userstock(current_user)), method: :delete, class:'btn btn-add-remove btn-tracked-remove' do%>
                     <span>Already Tracked</span>

@@ -5,6 +5,14 @@
     &-stock-basic-info{
         align-items: center;
     }
+    &-link{
+        color: #386f46 !important;
+        text-decoration: none;
+        &:hover{
+            color: #386f46 !important;
+            text-decoration: none;
+        }
+    }
     &-logo{
         height: 10rem;
         width: auto;

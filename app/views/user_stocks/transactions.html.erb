@@ -1,21 +1,25 @@
-<h1>Transaction Records</h1>
+<div class="heading-container mb-5 d-flex">
+  <h1 class="heading-primary heading-primary-h1">Transaction Records</h1>
+</div>
+
 <div class="row">
 <div class="col-12">
-  <table class="table table-bordered table-hover">
-  <thead>
+  <table class="table table-bordered table-hover text-center">
+  <thead class= "thead-dark">
     <tr>
-      <th scope="col">Transaction Type</th>
-      <th scope="col">Stock Name</th>
+      <th scope="col">Stock ticker</th>
+      <th scope="col">Transaction</th>
       <th scope="col">Quantity</th>
-      <th scope="col">price per share</th>
+      <th scope="col">Stock Price</th>
+      <th scope="col">Brokerage fee</th>
       <th scope="col">Total Price</th>
       <%if current_user.buyer?%>
-        <th scope="col">Broker Name</th>
+        <th scope="col">Broker</th>
       <%elsif current_user.broker?%>
-         <th scope="col">Buyer Name</th>
+         <th scope="col">Buyer</th>
       <%else%>
-          <th scope="col">Buyer Name</th>
-          <th scope="col">Broker Name</th>
+          <th scope="col">Buyer</th>
+          <th scope="col">Broker</th>
       <%end%>
       <th scope="col">Date</th>
     </tr>
@@ -24,11 +28,12 @@
   <%@transactions.each do |transaction|%>
     
     <tr>
+      <th scope="row"><%=transaction.stock.ticker%></th>
       <th scope="row"><%=transaction.transaction_type%></th>
-      <th scope="row"><%=transaction.stock.name%></th>
       <th scope="row"><%=transaction.quantity%></th>
       <th scope="row"><%=transaction.stock_price%></th>
-      <th scope="row"><%=transaction.total_price%></th>
+      <th scope="row"><%=number_with_precision(transaction.brokerage_fee, :precision => 2)%></th>
+      <th scope="row"><%=number_with_precision(transaction.total_price, :precision => 2)%></th>
       <%if current_user.buyer?%>
         <th scope="row"><%=transaction.broker.username%></th>
       <%elsif current_user.broker?%>
@@ -37,7 +42,7 @@
         <th scope="row"><%=transaction.buyer.username%></th>
         <th scope="row"><%=transaction.broker.username%></th>
       <%end%>
-      <th scope="row"><%=transaction.created_at%></th>
+      <th scope="row"><%=transaction.created_at.strftime( "%B %d, %Y")%></th>
      
     </tr>
   <%end%>
@@ -46,3 +51,10 @@
 </table>
 </div>
 </div>
+
+<div class="flickr_pagination">
+    <div class="page_info">
+      <%= page_entries_info @transactions %>
+    </div>
+    <%= will_paginate @transactions, :container => false %>
+  </div>

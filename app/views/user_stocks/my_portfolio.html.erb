@@ -1,4 +1,11 @@
-<h1>My Portfolio</h1>
+<div class="heading-container mb-5 d-flex">
+  <h1 class="heading-primary heading-primary-h1">My Portfolio</h1>
+  <%if current_user.buyer?%>.
+    <h2 class="heading-primary heading-primary-h3">
+      <i class="fas fa-wallet"></i> Available Cash: <span>$<%=number_with_precision(current_user.cash, :precision => 2)%></span> 
+    </h2>
+  <%end%>
+</div>
 
 <%if !@tracked_stocks.empty?%> 
   <%if current_user.broker?%>

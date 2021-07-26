@@ -16,7 +16,7 @@
                     <span>Already Tracked</span>
                 <%end%>
             <%else%>
-                <%=link_to 'Add to Portfolio', user_stocks_path(ticker: stock.ticker), class: "btn btn-xs btn-add-remove btn-success add-stock", method: :post, remote: true%>
+            <%=link_to 'Add to Portfolio', user_stocks_path(ticker: stock.ticker), class: "btn btn-xs btn-add-remove btn-success add-stock", method: :post, remote: true%>
             <%end%>
         </th>
     <%else%>
